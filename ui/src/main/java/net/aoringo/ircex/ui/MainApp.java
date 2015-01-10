@@ -9,20 +9,22 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import net.aoringo.ircex.receiver.CommandReceiver;
 
 /**
  * 
  * @author mikan
  */
 public class MainApp extends Application {
+    
+    private final CommandReceiver receiver = new CommandReceiver();
 
     @Override
     public void start(Stage stage) throws Exception {
+        receiver.start();
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
-        
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        
         stage.setTitle("JavaFX and Maven");
         stage.setScene(scene);
         stage.show();
