@@ -11,9 +11,9 @@ import javax.microedition.midlet.MIDlet;
  * @author mikan
  */
 public class IRClockExtreme extends MIDlet {
-    
+
     private IRListener listener;
-    
+
     @Override
     public void startApp() {
         listener = new IRListener();
@@ -24,14 +24,11 @@ public class IRClockExtreme extends MIDlet {
             notifyDestroyed();
         }
     }
-    
+
     @Override
     public void destroyApp(boolean unconditional) {
-        try {
-            listener.stop();
-        } catch (IOException ex) {
-            System.out.println("IOException: " + ex);
+        if (listener != null) {
+            listener.close();
         }
-        
     }
 }
