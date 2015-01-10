@@ -7,7 +7,7 @@ import urllib2
 argvs = sys.argv
 argc = len(argvs)
 response = {}
-url = "http://192.168.1.11:10000/"
+url = "http://localhost:10000/"
 headers = {
     "pragma":"no-cache",
 }
