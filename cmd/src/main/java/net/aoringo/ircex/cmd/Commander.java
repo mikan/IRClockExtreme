@@ -4,12 +4,13 @@
 package net.aoringo.ircex.cmd;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
 import java.util.logging.Level;
@@ -52,26 +53,37 @@ public class Commander {
     public void executePost(String command, String host) throws IOException {
         Objects.requireNonNull(command);
         Objects.requireNonNull(host);
+        String param = "command=" + URLEncoder.encode(command, "UTF-8");
         String hostWithPort = host;
         if (!host.contains(":")) {
             hostWithPort += ":10000";
         }
         HttpURLConnection connection = null;
         try {
-            // Request
+            // Create connection
             URL url = new URL("http://" + hostWithPort + "/");
             LOG.log(Level.INFO, "URL: {0}", url.toString());
             connection = (HttpURLConnection) url.openConnection();
-            connection.setDoOutput(true);
             connection.setRequestMethod("POST");
+            connection.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded");
+            connection.setRequestProperty("Content-Length",
+                    Integer.toString(param.getBytes().length));
             connection.setInstanceFollowRedirects(false);
+            connection.setUseCaches(false);
+            connection.setDoInput(true);
+            connection.setDoOutput(true);
             connection.connect();
-            String parameter = "command=" + command;
-            try (PrintWriter writer = new PrintWriter(connection.getOutputStream())) {
-                writer.print(parameter);
+
+            // Sending request
+            try (DataOutputStream output = new DataOutputStream(
+                    connection.getOutputStream())) {
+                output.writeBytes(param);
+                output.flush();
+                LOG.log(Level.INFO, "Request sent.");
             }
-            LOG.log(Level.INFO, "Request sent.");
-            // Response
+
+            // Receiving response
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
                 try (BufferedReader reader = new BufferedReader(
