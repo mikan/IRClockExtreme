@@ -62,6 +62,7 @@ public class Commander {
             URL url = new URL("http://" + hostWithPort + "/");
             LOG.log(Level.INFO, "URL: {0}", url.toString());
             connection = (HttpURLConnection) url.openConnection();
+            connection.setDoOutput(true);
             connection.setRequestMethod("POST");
             connection.setInstanceFollowRedirects(false);
             connection.connect();
