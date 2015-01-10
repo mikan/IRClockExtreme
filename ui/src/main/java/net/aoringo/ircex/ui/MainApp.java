@@ -1,5 +1,5 @@
 /*
- * Copyright(C) 2014-2015 mikan
+ * Copyright(C) 2014-2015 mikan All rights reserved.
  */
 package net.aoringo.ircex.ui;
 
@@ -22,12 +22,18 @@ public class MainApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         receiver.start();
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Scene.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
-        stage.setTitle("JavaFX and Maven");
+        stage.setTitle("IR Clock Extreme");
         stage.setScene(scene);
+        stage.setFullScreen(true);
         stage.show();
+    }
+    
+    @Override
+    public void stop() throws Exception {
+        receiver.close();
     }
 
     /**

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox id="wrapper" fx:id="wrapper" alignment="CENTER" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.aoringo.ircex.ui.ClockController">
+    <children>
+      <Label fx:id="labelClockDate">
+         <font>
+            <Font size="120.0" />
+         </font>
+      </Label>
+      <HBox alignment="CENTER">
+          <children>
+            <Label fx:id="labelClockHour" text="23">
+                <font>
+                    <Font size="340.0" />
+                </font>
+            </Label>             
+            <Label fx:id="labelClockColon" text=":">
+                <font>
+                    <Font size="340.0" />
+                </font>
+            </Label>
+            <Label fx:id="labelClockMinute" text="59">
+                <font>
+                    <Font size="340.0" />
+                </font>
+            </Label>             
+          </children>
+      </HBox>
+      <Label fx:id="labelDebug">
+         <font>
+            <Font name="Monospaced Regular" size="18.0" />
+         </font></Label>
+    </children>
+</VBox>

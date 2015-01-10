@@ -51,10 +51,15 @@ public class CommandReceiver implements AutoCloseable {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             String method = exchange.getRequestMethod();
-            if (method.equals("POST")) {
-                handlePost(exchange);
-            } else {
-                handleGet(exchange);
+            switch (method) {
+                case "POST":
+                    handlePost(exchange);
+                    break;
+                case "GET":
+                    handleGet(exchange);
+                    break;
+                default:
+                    throw new RuntimeException("Unknown method: " + method);
             }
         }
 
