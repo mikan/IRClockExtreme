@@ -63,9 +63,9 @@ public class Commander {
             // Response
             int responseCode = connection.getResponseCode();
             if (responseCode == HttpURLConnection.HTTP_OK) {
-                try (InputStreamReader isr = new InputStreamReader(
-                        connection.getInputStream(), StandardCharsets.UTF_8);
-                        BufferedReader reader = new BufferedReader(isr)) {
+                try (BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(connection.getInputStream(),
+                                StandardCharsets.UTF_8))) {
                     String line;
                     while ((line = reader.readLine()) != null) {
                         System.out.println(line);
