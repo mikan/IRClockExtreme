@@ -13,6 +13,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -28,14 +29,57 @@ public class Commander {
 
     /**
      * Main method.
+     * 
+     * <p>
+     * Usage:
+     * <ul>
+     * <li>java -jar cmd.jar MENU (Send "MENU" to localhost)</li>
+     * <li>java -jar cmd.jar ENTER 192.168.1.5 (Send "ENTER" to 192.168.1.5)</li>
+     * <li>java -jar cmd.jar ENTER 192.168.1.5:10000 (With port number)</li>
+     * <li>java -jar cmd.jar -i (Interactive mode with localhost)</li>
+     * <li>java -jar cmd.jar -i 192.168.1.5 (Interactive mode with 192.168.1.5)</li>
+     * </ul>
+     * </p>
      *
      * @param args args[0]: command (required), args[1]: host:port (optional)
      */
     public static void main(String[] args) {
+        // Missing arguments
         if (args == null || args.length == 0) {
             LOG.severe("Commander: You must specify a command.");
             return;
         }
+        // Interactive mode
+        if (args[0].equals("-i")) {
+            System.out.println("IRClockExtremeCommander interactive mode.");
+            Commander commander = new Commander();
+            Scanner input = new Scanner(System.in);
+            while (true) {
+                System.out.print("COMMAND>");
+                String command = input.nextLine();
+                if (command.isEmpty()) {
+                    // continue
+                } else if (command.equalsIgnoreCase("quit")) {
+                    return;
+                } else if (command.equalsIgnoreCase("exit")) {
+                    return;
+                } else if (command.contains(" ")) {
+                    String[] split = command.split(" ");
+                    try {
+                        commander.executePost(split[0], split[1]);
+                    } catch (IOException ex) {
+                        System.err.println(ex);
+                    }
+                } else {
+                    try {
+                        commander.executePost(command, args.length > 1 ? args[1] : DEFAULT_HOST);
+                    } catch (IOException ex) {
+                        System.err.println(ex);
+                    }
+                }
+            }
+        }
+        // One-shot mode
         String command = args[0];
         String host = args.length == 1 ? DEFAULT_HOST : args[1];
         LOG.log(Level.INFO, "Commander: Sending command: {0}", command);
