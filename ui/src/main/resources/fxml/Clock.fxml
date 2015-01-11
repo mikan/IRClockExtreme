@@ -42,7 +42,7 @@
                        <Font name="Monospaced Regular" size="14.0" />
                    </font>
                </Label>
-            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
+            <HBox fx:id="weatherBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
             <HBox prefHeight="100.0" prefWidth="200.0" />
            </children>
        </VBox>
@@ -53,7 +53,7 @@
                   <Font size="96.0" />
                </font>
             </Label>
-            <GridPane hgap="10.0" vgap="100.0">
+            <GridPane hgap="10.0" vgap="80.0">
               <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="624.0" minWidth="10.0" prefWidth="157.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="1134.0" minWidth="10.0" prefWidth="1109.0" />

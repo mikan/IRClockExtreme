@@ -3,8 +3,6 @@
  */
 package net.aoringo.ircex.ui;
 
-import javafx.application.Platform;
-
 /**
  * An enumeration of cursor of menu.
  *
@@ -18,9 +16,7 @@ enum MenuCursor {
     }),
     OPTION(2, () -> {
     }),
-    QUIT(3, () -> {
-        System.exit(0); // Shutdown both Platform and Receiver.
-    });
+    QUIT(3, () -> System.exit(0));
 
     private final int index;
     private final EnterAction enterAction;

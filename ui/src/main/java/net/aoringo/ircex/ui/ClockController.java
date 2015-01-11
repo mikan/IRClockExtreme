@@ -12,10 +12,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import net.aoringo.ircex.receiver.Command;
 import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
+import net.aoringo.ircex.ui.plugin.Plugin;
+import net.aoringo.ircex.ui.plugin.standard.WeatherPlugin;
 
 /**
  *
@@ -48,6 +51,9 @@ public class ClockController implements Initializable, CommandCallback {
     @FXML
     private Label labelDebug;
     
+    @FXML
+    private HBox weatherBox;
+    
     // #################### MENU SCREEN ITEMS ####################
 
     @FXML
@@ -69,8 +75,17 @@ public class ClockController implements Initializable, CommandCallback {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        // Initialize UI components
         menu.setVisible(false);
         menuCursor = MenuCursor.ADD;
+        
+        // Initialize standard plugins
+        Plugin weather = new WeatherPlugin(weatherBox);
+        
+        // Initialize additional plugins
+        
+        // Start update threads
         updaterThread = new Thread(new ClockUpdater(labelClockDate, labelClockHour,
                 labelClockColon, labelClockMinute));
         updaterThread.setDaemon(true);
@@ -78,6 +93,8 @@ public class ClockController implements Initializable, CommandCallback {
         animatorThread = new Thread(new ColorAnimator(wrapper, labelDebug));
         animatorThread.setDaemon(true);
         animatorThread.start();
+        
+        // Start IR receiver
         receiver = new CommandReceiver(this);
         try {
             receiver.start();
