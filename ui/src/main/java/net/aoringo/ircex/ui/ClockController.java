@@ -28,6 +28,8 @@ public class ClockController implements Initializable, CommandCallback {
     private Thread animatorThread;
     private CommandReceiver receiver;
     
+    // #################### BASE SCREEN ITEMS ####################
+    
     @FXML
     private Pane wrapper;
 
@@ -46,12 +48,29 @@ public class ClockController implements Initializable, CommandCallback {
     @FXML
     private Label labelDebug;
     
+    // #################### MENU SCREEN ITEMS ####################
+
     @FXML
     private Pane menu;
-
+    
+    @FXML
+    private Label labelCursorAdd;
+    
+    @FXML
+    private Label labelCursorRemove;
+    
+    @FXML
+    private Label labelCursorOption;
+    
+    @FXML
+    private Label labelCursorQuit;
+    
+    private MenuCursor menuCursor;
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         menu.setVisible(false);
+        menuCursor = MenuCursor.ADD;
         updaterThread = new Thread(new ClockUpdater(labelClockDate, labelClockHour,
                 labelClockColon, labelClockMinute));
         updaterThread.setDaemon(true);
@@ -85,8 +104,34 @@ public class ClockController implements Initializable, CommandCallback {
             Platform.runLater(() -> {
                 menu.setVisible(!menu.isVisible());
             });
+        } else if (command == Command.UP) {
+            Platform.runLater(() -> {
+                menuCursor = menuCursor.up();
+                labelCursorAdd.setVisible(menuCursor == MenuCursor.ADD);
+                labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
+                labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
+                labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);
+            });
+        } else if (command == Command.DOWN) {
+            Platform.runLater(() -> {
+                menuCursor = menuCursor.down();
+                labelCursorAdd.setVisible(menuCursor == MenuCursor.ADD);
+                labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
+                labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
+                labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);
+            });
+        } else if (command == Command.ENTER) {
+            if (menu.isVisible()) {
+                switch (menuCursor) {
+                    case QUIT:
+                        Platform.exit();
+                        break;
+                    default:
+                        break;
+                }
+            }
         } else {
-            LOG.info("Sorry, " + command + "is currently unsupported.");
+            LOG.severe("Sorry, " + command + " is currently unsupported.");
         }
     }
 }

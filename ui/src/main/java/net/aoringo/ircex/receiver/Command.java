@@ -8,5 +8,5 @@ package net.aoringo.ircex.receiver;
  * @author mikan
  */
 public enum Command {
-    MENU, UP, DOWN, ENTER;
+    MENU, UP, DOWN, ENTER, LEFT, RIGHT;
 }
