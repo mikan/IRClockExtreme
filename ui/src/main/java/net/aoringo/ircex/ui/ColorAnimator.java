@@ -3,9 +3,9 @@
  */
 package net.aoringo.ircex.ui;
 
-import com.sun.istack.internal.logging.Logger;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
@@ -16,7 +16,7 @@ import javafx.scene.layout.Pane;
  */
 class ColorAnimator implements Runnable {
     
-    private static final Logger LOG = Logger.getLogger(ColorAnimator.class);
+    private static final Logger LOG = Logger.getLogger(ColorAnimator.class.getName());
     private static final int REFRESH_INTERVAL = 200;
     private static final String CSS_BG = "-fx-background-color:";
     private static final String[] KEY_FRAMES = {
@@ -47,7 +47,7 @@ class ColorAnimator implements Runnable {
                 Platform.runLater(() -> {
                     Color nextColor = next();
                     pane.setStyle(CSS_BG + nextColor.getColorCode());     
-                    label.setText(String.format("%3d%% ", percent) + nextColor);
+                    label.setText(String.format("%3d ", percent) + nextColor);
                 });
                 Thread.sleep(REFRESH_INTERVAL);
             } catch (InterruptedException ex) {

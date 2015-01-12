@@ -34,28 +34,13 @@ public class WeatherReader {
     }
 
     public WeatherForecast getWeatherForecast() throws IOException {
+        System.out.println(url);
         String json = client.requestGet(url);
         ObjectMapper mapper = new ObjectMapper();
         return mapper.readValue(json, WeatherForecast.class);
     }
-
-    /**
-     * City definition.
-     *
-     * @see http://openweathermap.org/city/
-     */
-    public enum City {
-
-        TOKYO("1850147"), YOKOHAMA("1848354");
-
-        private final String code;
-
-        City(String code) {
-            this.code = code;
-        }
-
-        private String getCode() {
-            return code;
-        }
+    
+    public byte[] getIcon(String iconId) throws IOException {
+        return client.requestGetAsByteArray(ICON_URL + iconId + ICON_SUFFIX);
     }
 }

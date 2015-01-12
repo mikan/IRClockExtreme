@@ -5,6 +5,9 @@ package net.aoringo.ircex.ui.plugin.weather;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -101,24 +104,46 @@ public class WeatherForecast {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static class Forecast {
+        
+        private static final String DATETIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
         private long dt;
+        
+        @JsonProperty("main")
         private Main main;
         
         @JsonProperty("weather")
+        @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
         private List<Weather> weathers;
         
+        @JsonProperty("clouds")
         private Clouds clouds;
+        
+        @JsonProperty("wind")
+        private Wind wind;
+        
+        @JsonProperty("rain")
         private Rain rain;
+        
+        @JsonProperty("snow")
         private Snow snow;
 
         @JsonProperty("dt_txt")
         private String dtText;
+        
+        public LocalDateTime getDateTime() {
+            return LocalDateTime.parse(dtText, 
+                    DateTimeFormatter.ofPattern(DATETIME_FORMAT));
+        }
+        
+        public LocalDateTime getJSTDateTime() {
+            return getDateTime().plusHours(9);
+        }
 
         /**
          * @return Data receiving time, unix time, GMT
          */
-        public long getDateTime() {
+        public long getDateTimeAsLong() {
             return dt;
         }
 
@@ -132,8 +157,12 @@ public class WeatherForecast {
         /**
          * @return Temperature, Kelvin (subtract 273.15 to convert to Celsius)
          */
-        public float getTemp() {
+        public float getTempAsKelvin() {
             return main.temp;
+        }
+        
+        public float getTempAsCelsius() {
+            return main.temp - 273.15f;
         }
 
         /**
@@ -231,6 +260,27 @@ public class WeatherForecast {
         public int getSnow() {
             return snow != null ? snow.three : 0;
         }
+        
+        /**
+         * @return Wind speed, mps
+         */
+        public float getWindSpeed() {
+            return wind != null ? wind.speed : 0;
+        }
+        
+        /**
+         * @return Wind direction, degrees (meteorological)
+         */
+        public float getWindDirection() {
+            return wind != null ? wind.deg : 0;
+        }
+        
+        /**
+         * @return Wind gust, mps
+         */
+        public float getWindDust() {
+            return wind != null ? wind.gust : 0;
+        }
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         private static class Main {
@@ -271,6 +321,13 @@ public class WeatherForecast {
         @JsonIgnoreProperties(ignoreUnknown = true)
         private static class Clouds {
             private int all;
+        }
+        
+        @JsonIgnoreProperties(ignoreUnknown = true)
+        private static class Wind {
+            private float speed;
+            private float deg;
+            private float gust;
         }
         
         @JsonIgnoreProperties(ignoreUnknown = true)

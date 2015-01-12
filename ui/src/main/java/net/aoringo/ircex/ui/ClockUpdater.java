@@ -3,9 +3,9 @@
  */
 package net.aoringo.ircex.ui;
 
-import com.sun.istack.internal.logging.Logger;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.scene.control.Label;
 
@@ -15,10 +15,10 @@ import javafx.scene.control.Label;
  */
 class ClockUpdater implements Runnable {
 
-    private static final Logger LOG = Logger.getLogger(ClockUpdater.class);
+    private static final Logger LOG = Logger.getLogger(ClockUpdater.class.getName());
     private static final int REFRESH_INTERVAL = 100;
     private static final DateTimeFormatter FORMAT
-            = DateTimeFormatter.ISO_DATE;
+            = DateTimeFormatter.ofPattern("yyyy/MM/dd EEE");
     private final Label date;
     private final Label hour;
     private final Label colon;

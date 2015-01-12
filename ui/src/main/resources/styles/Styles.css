@@ -5,3 +5,27 @@
 #wrapper {
     -fx-background-color: #e74c3c;
 }
+
+#labelClockDate {
+    -fx-font-size: 100px;
+}
+
+.labelClockTime {
+    -fx-font-size: 300px;
+}
+
+#labelMenuTitle {
+    -fx-font-size: 96px;
+}
+
+.labelMenuCursor {
+    -fx-font-size: 72px;
+}
+
+.labelMenuItem {
+    -fx-font-size: 72px;    
+}
+
+.labelDebug {
+    -fx-font: 14px "Monospaced Regular";
+}

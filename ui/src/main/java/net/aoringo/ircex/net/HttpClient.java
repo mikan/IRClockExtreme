@@ -8,7 +8,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -26,10 +25,11 @@ public class HttpClient {
     }
 
     public String requestGet(String url) throws IOException {
-        HttpURLConnection connection = createConnection(url);
-        StringBuilder builder = new StringBuilder();
+        Objects.requireNonNull(url);
+        HttpURLConnection connection = createConnection(new URL(url));
         int rcode = connection.getResponseCode();
         if (rcode == HttpURLConnection.HTTP_OK) {
+            StringBuilder builder = new StringBuilder();
             try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(connection.getInputStream(),
                             StandardCharsets.UTF_8))) {
@@ -38,20 +38,20 @@ public class HttpClient {
                     builder.append(line);
                 }
             }
+            return builder.toString();
         } else {
-            throw new RuntimeException("HTTP Error: " + rcode + " "
-                    + connection.getResponseMessage());
+            throw new RuntimeException("HTTP Error: " + rcode);
         }
-        return builder.toString();
     }
 
-    public OutputStream requestGetAsStream(String url) throws IOException {
-        HttpURLConnection connection = createConnection(url);
-        OutputStream output = new ByteArrayOutputStream();
-        byte[] buffer = new byte[4096];
-        int n;
-        int responseCode = connection.getResponseCode();
-        if (responseCode == HttpURLConnection.HTTP_OK) {
+    public byte[] requestGetAsByteArray(String url) throws IOException {
+        Objects.requireNonNull(url);
+        HttpURLConnection connection = createConnection(new URL(url));
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        int rcode = connection.getResponseCode();
+        if (rcode == HttpURLConnection.HTTP_OK) {
+            byte[] buffer = new byte[4096];
+            int n;
             try (InputStream input = connection.getInputStream()) {
                 while ((n = input.read(buffer)) != -1) {
                     if (n > 0) {
@@ -59,15 +59,14 @@ public class HttpClient {
                     }
                 }
             }
+            return output.toByteArray();
         } else {
-            throw new RuntimeException("HTTP Error: " + responseCode);
+            throw new RuntimeException("HTTP Error: " + rcode);
         }
-        return output;
     }
 
-    private HttpURLConnection createConnection(String url) throws IOException {
-        Objects.requireNonNull(url);
-        HttpURLConnection connection = (HttpURLConnection) new URL(url).openConnection();
+    private HttpURLConnection createConnection(URL url) throws IOException {
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setInstanceFollowRedirects(false);
         connection.setUseCaches(false);

@@ -20,6 +20,6 @@ public interface Plugin {
      * Plugin status.
      */
     public enum Status {
-        NORMAL, ATTENTION, ALERT;
+        LOADING, NORMAL, REFRESHING, ATTENTION, ALERT;
     }
 }
