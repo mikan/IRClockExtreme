@@ -18,7 +18,7 @@ import net.aoringo.ircex.receiver.Command;
 import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
 import net.aoringo.ircex.ui.plugin.Plugin;
-import net.aoringo.ircex.ui.plugin.standard.WeatherPlugin;
+import net.aoringo.ircex.ui.plugin.weather.WeatherPlugin;
 
 /**
  *

@@ -1,7 +1,7 @@
 /*
  * Copyright(C) 2014-2015 mikan All rights reserved.
  */
-package net.aoringo.ircex.ui.plugin.standard;
+package net.aoringo.ircex.ui.plugin.weather;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
