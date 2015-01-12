@@ -11,7 +11,17 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
 /**
- *
+ * Create and display color animation.
+ * 
+ * <p>
+ * The algorithm:
+ * <ul>
+ * <li>Calculate step-by-step RGB shift between Key Frames.</li>
+ * <li>Change current working Key Frame when steps are completed.</li>
+ * <li>Reset current working Key Frame when Key Frames are completed.</li>
+ * </ul>
+ * </p>
+ * 
  * @author mikan
  */
 class ColorAnimator implements Runnable {
