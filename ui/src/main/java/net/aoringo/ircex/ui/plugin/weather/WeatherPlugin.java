@@ -34,7 +34,6 @@ public class WeatherPlugin implements Plugin {
     private static final int ICON_SIZE = 75; // Actual size: 50
     private final ObservableList<Node> children;
     private final City city;
-    private PluginCallback callback;
 
     public WeatherPlugin(Pane pane) {
         city = City.YOKOHAMA;
@@ -51,11 +50,6 @@ public class WeatherPlugin implements Plugin {
     @Override
     public String getName() {
         return NAME;
-    }
-
-    @Override
-    public byte[] getIcon() {
-        return null;
     }
 
     @Override
@@ -81,6 +75,16 @@ public class WeatherPlugin implements Plugin {
                 });
             }
         }).start();
+    }
+
+    @Override
+    public byte[] getIcon() {
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public void setCallback(PluginCallback callback) {
+        throw new UnsupportedOperationException();
     }
 
     private ProgressIndicator createProgress() {
@@ -145,10 +149,5 @@ public class WeatherPlugin implements Plugin {
         pane.getChildren().add(labelX);
         pane.getChildren().add(labelMessage);
         children.add(pane);
-    }
-
-    @Override
-    public void setCallback(PluginCallback callback) {
-        this.callback = callback;
     }
 }

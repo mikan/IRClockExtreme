@@ -3,7 +3,6 @@
  */
 package net.aoringo.ircex.ui;
 
-import net.aoringo.ircex.ui.plugin.PluginManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -21,6 +20,7 @@ import net.aoringo.ircex.receiver.Command;
 import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
 import net.aoringo.ircex.ui.plugin.Plugin;
+import net.aoringo.ircex.ui.plugin.PluginManager;
 import net.aoringo.ircex.ui.plugin.traffic.TokyuPlugin;
 import net.aoringo.ircex.ui.plugin.weather.City;
 import net.aoringo.ircex.ui.plugin.weather.WeatherPlugin;
@@ -182,7 +182,7 @@ public class ClockController implements Initializable, CommandCallback {
             if (menu.isVisible()) {
                 switch (menuCursor) {
                     case QUIT:
-                        Platform.exit();
+                        System.exit(0);
                         break;
                     default:
                         break;

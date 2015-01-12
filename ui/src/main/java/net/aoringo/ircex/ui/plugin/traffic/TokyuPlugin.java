@@ -66,7 +66,6 @@ public class TokyuPlugin implements Plugin {
                 String info = html.substring(cp2 + 7, infoPos);
                 setStatus(Status.NORMAL);
                 setMessage(info + " (" + time + ")");
-                LOG.info(info + " (" + time + ")");
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, "IOException", ex);
                 setStatus(Status.ERROR);

@@ -27,7 +27,7 @@ import javafx.scene.layout.Pane;
 class ColorAnimator implements Runnable {
     
     private static final Logger LOG = Logger.getLogger(ColorAnimator.class.getName());
-    private static final int REFRESH_INTERVAL = 200;
+    private static final int REFRESH_INTERVAL = 300;
     private static final String CSS_BG = "-fx-background-color:";
     private static final String[] KEY_FRAMES = {
         "#e74c3c", "#f1c40f", "#1abc9c", "#3498db", "#9b59b6", "#e74c3c"

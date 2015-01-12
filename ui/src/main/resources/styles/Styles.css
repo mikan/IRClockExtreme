@@ -7,7 +7,7 @@
 }
 
 #labelClockDate {
-    -fx-font-size: 80px;
+    -fx-font-size: 60px;
 }
 
 .labelClockTime {
@@ -15,8 +15,10 @@
 }
 
 #labelPluginMessage {
+    -fx-padding: 10px;
     -fx-background-radius: 10;
     -fx-background-color: rgba(255,255,255,0.5);
+    -fx-font-size: 20px;
 }
 
 #menu {

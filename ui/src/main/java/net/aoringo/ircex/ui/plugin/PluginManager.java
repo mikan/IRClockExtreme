@@ -12,9 +12,7 @@ import javafx.scene.control.ProgressIndicator;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import net.aoringo.ircex.ui.plugin.Plugin;
 import net.aoringo.ircex.ui.plugin.Plugin.Status;
-import net.aoringo.ircex.ui.plugin.PluginCallback;
 
 /**
  * Manage plugins.

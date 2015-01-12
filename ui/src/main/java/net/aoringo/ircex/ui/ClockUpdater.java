@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
 class ClockUpdater implements Runnable {
 
     private static final Logger LOG = Logger.getLogger(ClockUpdater.class.getName());
-    private static final int REFRESH_INTERVAL = 100;
+    private static final int REFRESH_INTERVAL = 200;
     private static final DateTimeFormatter FORMAT
             = DateTimeFormatter.ofPattern("yyyy/MM/dd EEE");
     private final Label date;
