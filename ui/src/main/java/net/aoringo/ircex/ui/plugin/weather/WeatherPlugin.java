@@ -19,6 +19,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import net.aoringo.ircex.ui.plugin.Plugin;
+import net.aoringo.ircex.ui.plugin.PluginCallback;
 import net.aoringo.ircex.ui.plugin.weather.WeatherForecast.Forecast;
 
 /**
@@ -33,6 +34,7 @@ public class WeatherPlugin implements Plugin {
     private static final int ICON_SIZE = 75; // Actual size: 50
     private final ObservableList<Node> children;
     private final City city;
+    private PluginCallback callback;
 
     public WeatherPlugin(Pane pane) {
         city = City.YOKOHAMA;
@@ -90,6 +92,11 @@ public class WeatherPlugin implements Plugin {
     private void showForecasts(WeatherForecast weatherForecast) {
         Platform.runLater(() -> {
             children.clear();
+            // City label
+            Label labelCity = new Label(weatherForecast.getCity().getName());
+            labelCity.setStyle("-fx-font-size: 32px");
+            children.add(labelCity);
+            // Weather icons
             WeatherReader reader = new WeatherReader();
             int count = 0;
             for (Forecast forecast : weatherForecast.getForecasts()) {
@@ -115,9 +122,6 @@ public class WeatherPlugin implements Plugin {
                     break;
                 }
             }
-            Label labelCity = new Label(weatherForecast.getCity().getName());
-            labelCity.setStyle("-fx-font-size: 40px");
-            children.add(labelCity);
         });
     }
 
@@ -141,5 +145,10 @@ public class WeatherPlugin implements Plugin {
         pane.getChildren().add(labelX);
         pane.getChildren().add(labelMessage);
         children.add(pane);
+    }
+
+    @Override
+    public void setCallback(PluginCallback callback) {
+        this.callback = callback;
     }
 }

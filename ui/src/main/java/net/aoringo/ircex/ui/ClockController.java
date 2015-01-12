@@ -3,6 +3,7 @@
  */
 package net.aoringo.ircex.ui;
 
+import net.aoringo.ircex.ui.plugin.PluginManager;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,6 +21,7 @@ import net.aoringo.ircex.receiver.Command;
 import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
 import net.aoringo.ircex.ui.plugin.Plugin;
+import net.aoringo.ircex.ui.plugin.traffic.TokyuPlugin;
 import net.aoringo.ircex.ui.plugin.weather.City;
 import net.aoringo.ircex.ui.plugin.weather.WeatherPlugin;
 
@@ -33,6 +35,7 @@ public class ClockController implements Initializable, CommandCallback {
     private Thread updaterThread;
     private Thread animatorThread;
     private CommandReceiver receiver;
+    private PluginManager plugins;
 
     // #################### BASE SCREEN ITEMS ####################
     @FXML
@@ -55,6 +58,12 @@ public class ClockController implements Initializable, CommandCallback {
 
     @FXML
     private HBox weatherBox;
+    
+    @FXML
+    private Label labelPluginMessage;
+    
+    @FXML
+    private HBox pluginIconBox;
 
     // #################### MENU SCREEN ITEMS ####################
     @FXML
@@ -81,9 +90,13 @@ public class ClockController implements Initializable, CommandCallback {
         menu.setVisible(false);
         menuCursor = MenuCursor.ADD;
 
-        // Initialize standard plugins
+        // Initialize weather plugin
         Plugin weather = new WeatherPlugin(weatherBox, City.YOKOHAMA);
         weather.refresh();
+        
+        // Initialize misc plugins
+        plugins = new PluginManager(labelPluginMessage, pluginIconBox);
+        plugins.addPlugin(new TokyuPlugin());
 
         // Initialize additional plugins
         // Start update threads

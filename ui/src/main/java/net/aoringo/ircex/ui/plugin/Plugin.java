@@ -15,11 +15,12 @@ public interface Plugin {
     public String getMessage();
     public Status getStatus();
     public void refresh();
+    public void setCallback(PluginCallback callback);
     
     /**
      * Plugin status.
      */
     public enum Status {
-        LOADING, NORMAL, REFRESHING, ATTENTION, ALERT;
+        LOADING, NORMAL, REFRESHING, ATTENTION, ALERT, ERROR;
     }
 }
