@@ -10,6 +10,7 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -73,9 +74,17 @@ public class PluginManager {
         for (int i = 0; i < nodes.size(); i++) {
             Node node = nodes.get(i);
             if (i == selected) {
-                node.setStyle("-fx-background-color: rgba(255,255,255,0.5)");
+                BoxBlur blur = new BoxBlur();
+                blur.setWidth(0);
+                blur.setHeight(0);
+                blur.setIterations(0);
+                node.setEffect(blur);
             } else {
-                node.setStyle("-fx-background-color: rgba(255,255,255,0.0)");
+                BoxBlur blur = new BoxBlur();
+                blur.setWidth(7);
+                blur.setHeight(7);
+                blur.setIterations(3);
+                node.setEffect(blur);
             }
         }
     }

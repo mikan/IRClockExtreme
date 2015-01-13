@@ -81,7 +81,7 @@ public class Todo implements Comparable<Todo> {
     
     @Override
     public String toString() {
-        return "\"" + title + "\"";
+        return title;
     }
 
     @Override

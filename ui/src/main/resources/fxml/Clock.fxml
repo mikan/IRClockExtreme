@@ -14,7 +14,7 @@
         <VBox id="clock" alignment="CENTER" prefHeight="768.0" prefWidth="1366.0">
             <children>
                 <Label id="labelClockDate" fx:id="labelClockDate" />
-                <HBox alignment="CENTER">
+                <HBox fx:id="clockBox" alignment="CENTER">
                     <children>
                         <Label fx:id="labelClockHour" styleClass="labelClockTime" text="23" />
                         <Label fx:id="labelClockColon" styleClass="labelClockTime" text=":" />

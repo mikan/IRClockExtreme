@@ -23,8 +23,8 @@ import net.aoringo.ircex.ui.plugin.Plugin;
 import net.aoringo.ircex.ui.plugin.PluginManager;
 import net.aoringo.ircex.ui.plugin.todowatch.TodoWatchPlugin;
 import net.aoringo.ircex.ui.plugin.traffic.TokyuPlugin;
-import net.aoringo.ircex.ui.plugin.weather.entity.City;
 import net.aoringo.ircex.ui.plugin.weather.WeatherPlugin;
+import net.aoringo.ircex.ui.plugin.weather.entity.City;
 
 /**
  *
@@ -46,6 +46,9 @@ public class ClockController implements Initializable, CommandCallback {
     private Label labelClockDate;
 
     @FXML
+    private Pane clockBox;
+
+    @FXML
     private Label labelClockHour;
 
     @FXML
@@ -59,10 +62,10 @@ public class ClockController implements Initializable, CommandCallback {
 
     @FXML
     private HBox weatherBox;
-    
+
     @FXML
     private Label labelPluginMessage;
-    
+
     @FXML
     private HBox pluginIconBox;
 
@@ -88,13 +91,14 @@ public class ClockController implements Initializable, CommandCallback {
     public void initialize(URL url, ResourceBundle rb) {
 
         // Initialize UI components
+        wrapper.requestFocus();
         menu.setVisible(false);
         menuCursor = MenuCursor.ADD;
 
         // Initialize weather plugin
         Plugin weather = new WeatherPlugin(weatherBox, City.YOKOHAMA);
         weather.refresh();
-        
+
         // Initialize misc plugins
         plugins = new PluginManager(labelPluginMessage, pluginIconBox);
         plugins.addPlugin(new TokyuPlugin());

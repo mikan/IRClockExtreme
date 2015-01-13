@@ -62,6 +62,7 @@ public class TodoWatchPlugin implements Plugin {
                 todos = new TodoWatchClient("unko", "unko").getList();
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, null, ex);
+                setStatus(Status.ERROR);
                 return;
             }
             StringBuilder builder = new StringBuilder();
