@@ -54,6 +54,10 @@ public class TokyuPlugin implements Plugin {
 
     @Override
     public void refresh() {
+        message = "Refreshing...";
+        if (callback != null) {
+            callback.messageChanged(this);
+        }
         new Thread(() -> {
             setStatus(Status.LOADING);
             try {
@@ -68,6 +72,7 @@ public class TokyuPlugin implements Plugin {
                 setMessage(info + " (" + time + ")");
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, "IOException", ex);
+                setMessage("ERROR: " + ex.getMessage());
                 setStatus(Status.ERROR);
             }
         }).start();

@@ -10,6 +10,7 @@ import java.util.Objects;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Bloom;
 import javafx.scene.effect.BoxBlur;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -48,8 +49,20 @@ public class PluginManager {
         updateSelect();
     }
 
+    public void refreshSelected() {
+        plugins.get(selected).refresh();
+    }
+
     public void refreshAll() {
         plugins.forEach(p -> p.refresh());
+    }
+    
+    public void select(int index) {
+        if (index < 0 || index >= plugins.size()) {
+            throw new IllegalArgumentException("index is out of range: " + index);
+        }
+        selected = index;
+        updateSelect();
     }
 
     public void selectNext() {
@@ -62,7 +75,7 @@ public class PluginManager {
 
     public void selectPrevious() {
         selected--;
-        if (selected <= 0) {
+        if (selected < 0) {
             selected = plugins.size() - 1;
         }
         updateSelect();
@@ -93,9 +106,11 @@ public class PluginManager {
 
         @Override
         public void messageChanged(Plugin plugin) {
-            messageLabel.setText(plugin.getMessage());
-            selected = plugins.indexOf(plugin);
-            updateSelect();
+            if (plugins.indexOf(plugin) == selected) {
+                messageLabel.setText(plugin.getMessage());
+                selected = plugins.indexOf(plugin);
+                updateSelect();
+            }
         }
 
         @Override
@@ -103,6 +118,9 @@ public class PluginManager {
             if (plugin.getStatus() == Status.LOADING
                     || plugin.getStatus() == Status.REFRESHING) {
 
+            } else if (plugin.getStatus() == Status.ATTENTION) {
+                Node node = iconPane.getChildren().get(plugins.indexOf(plugin));
+                node.setEffect(new Bloom());
             }
         }
 

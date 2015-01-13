@@ -56,12 +56,17 @@ public class TodoWatchPlugin implements Plugin {
 
     @Override
     public void refresh() {
+        message = "Refreshing...";
+        if (callback != null) {
+            callback.messageChanged(this);
+        }
         new Thread(() -> {
             List<Todo> todos;
             try {
                 todos = new TodoWatchClient("unko", "unko").getList();
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, null, ex);
+                setMessage("ERROR: " + ex.getMessage());
                 setStatus(Status.ERROR);
                 return;
             }
@@ -70,11 +75,13 @@ public class TodoWatchPlugin implements Plugin {
                 builder.append("[").append(i + 1).append("] ");
                 builder.append(todos.get(i)).append(" ");
             }
+            Status res = Status.ATTENTION;
             if (builder.toString().isEmpty()) {
                 builder.append("(Nothing to do!)");
+                res = Status.NORMAL;
             }
             setMessage(builder.toString());
-            setStatus(Status.NORMAL);
+            setStatus(res);
         }).start();
     }
 

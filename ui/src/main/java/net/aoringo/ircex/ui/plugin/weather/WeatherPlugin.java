@@ -3,8 +3,6 @@
  */
 package net.aoringo.ircex.ui.plugin.weather;
 
-import net.aoringo.ircex.ui.plugin.weather.entity.City;
-import net.aoringo.ircex.ui.plugin.weather.entity.WeatherForecast;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,8 +18,11 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import net.aoringo.ircex.ui.plugin.IconLoader;
 import net.aoringo.ircex.ui.plugin.Plugin;
 import net.aoringo.ircex.ui.plugin.PluginCallback;
+import net.aoringo.ircex.ui.plugin.weather.entity.City;
+import net.aoringo.ircex.ui.plugin.weather.entity.WeatherForecast;
 import net.aoringo.ircex.ui.plugin.weather.entity.WeatherForecast.Forecast;
 
 /**
@@ -36,17 +37,22 @@ public class WeatherPlugin implements Plugin {
     private static final int ICON_SIZE = 75; // Actual size: 50
     private final ObservableList<Node> children;
     private final City city;
+    private final byte[] icon;
+    private String message = "Loading...";
+    private PluginCallback callback;
 
     public WeatherPlugin(Pane pane) {
         city = City.YOKOHAMA;
         children = pane.getChildren();
         children.add(createProgress());
+        icon = new IconLoader().load("weather.png");
     }
 
     public WeatherPlugin(Pane pane, City city) {
         this.city = city;
         children = pane.getChildren();
         children.add(createProgress());
+        icon = new IconLoader().load("weather.png");
     }
 
     @Override
@@ -56,7 +62,7 @@ public class WeatherPlugin implements Plugin {
 
     @Override
     public String getMessage() {
-        return new String();
+        return message;
     }
 
     @Override
@@ -68,8 +74,10 @@ public class WeatherPlugin implements Plugin {
     public void refresh() {
         new Thread(() -> {
             try {
+                setMessage("Refreshing...");
                 WeatherReader reader = new WeatherReader(city);
                 showForecasts(reader.getWeatherForecast());
+                setMessage("Press CENTER BUTTON to refresh weather.");
             } catch (IOException ex) {
                 LOG.log(Level.SEVERE, "Refresh failed!", ex);
                 Platform.runLater(() -> {
@@ -81,12 +89,12 @@ public class WeatherPlugin implements Plugin {
 
     @Override
     public byte[] getIcon() {
-        throw new UnsupportedOperationException();
+        return icon;
     }
 
     @Override
     public void setCallback(PluginCallback callback) {
-        throw new UnsupportedOperationException();
+        this.callback = callback;
     }
 
     private ProgressIndicator createProgress() {
@@ -151,5 +159,14 @@ public class WeatherPlugin implements Plugin {
         pane.getChildren().add(labelX);
         pane.getChildren().add(labelMessage);
         children.add(pane);
+    }
+
+    private void setMessage(String message) {
+        this.message = message;
+        if (callback != null) {
+            Platform.runLater(() -> {
+                callback.messageChanged(this);
+            });
+        }
     }
 }

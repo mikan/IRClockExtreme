@@ -19,8 +19,8 @@ import javafx.scene.layout.Pane;
 import net.aoringo.ircex.receiver.Command;
 import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
-import net.aoringo.ircex.ui.plugin.Plugin;
 import net.aoringo.ircex.ui.plugin.PluginManager;
+import net.aoringo.ircex.ui.plugin.camera.CameraPlugin;
 import net.aoringo.ircex.ui.plugin.todowatch.TodoWatchPlugin;
 import net.aoringo.ircex.ui.plugin.traffic.TokyuPlugin;
 import net.aoringo.ircex.ui.plugin.weather.WeatherPlugin;
@@ -95,22 +95,13 @@ public class ClockController implements Initializable, CommandCallback {
         menu.setVisible(false);
         menuCursor = MenuCursor.ADD;
 
-        // Initialize weather plugin
-        Plugin weather = new WeatherPlugin(weatherBox, City.YOKOHAMA);
-        weather.refresh();
-
-        // Initialize misc plugins
-        plugins = new PluginManager(labelPluginMessage, pluginIconBox);
-        plugins.addPlugin(new TokyuPlugin());
-        plugins.addPlugin(new TodoWatchPlugin());
-
-        // Initialize additional plugins
         // Start update threads
         updaterThread = new Thread(new ClockUpdater(labelClockDate, labelClockHour,
                 labelClockColon, labelClockMinute));
         updaterThread.setDaemon(true);
         updaterThread.start();
-        animatorThread = new Thread(new ColorAnimator(wrapper, labelDebug));
+        ColorAnimator animator = new ColorAnimator(wrapper, labelDebug);
+        animatorThread = new Thread(animator);
         animatorThread.setDaemon(true);
         animatorThread.start();
 
@@ -122,6 +113,14 @@ public class ClockController implements Initializable, CommandCallback {
             LOG.log(Level.SEVERE, "Cannot start the command receiver.", ex);
             throw new RuntimeException("Cannot start the command receiver.");
         }
+        
+                // Initialize plugins
+        plugins = new PluginManager(labelPluginMessage, pluginIconBox);
+        plugins.addPlugin(new WeatherPlugin(weatherBox, City.YOKOHAMA));
+        plugins.addPlugin(new TokyuPlugin());
+        plugins.addPlugin(new TodoWatchPlugin());
+        plugins.addPlugin(new CameraPlugin(wrapper, animator));
+        plugins.select(1); // Focus to TokyuPlugin
     }
 
     @FXML
@@ -201,6 +200,8 @@ public class ClockController implements Initializable, CommandCallback {
                     default:
                         break;
                 }
+            } else {
+                plugins.refreshSelected();
             }
         } else {
             LOG.log(Level.SEVERE, "Sorry, {0} is currently unsupported.", command);

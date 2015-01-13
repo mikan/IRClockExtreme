@@ -24,7 +24,7 @@ import javafx.scene.layout.Pane;
  * 
  * @author mikan
  */
-class ColorAnimator implements Runnable {
+public class ColorAnimator implements Runnable {
     
     private static final Logger LOG = Logger.getLogger(ColorAnimator.class.getName());
     private static final int REFRESH_INTERVAL = 300;
@@ -37,6 +37,7 @@ class ColorAnimator implements Runnable {
     private final Pane pane;
     private final Label label;
     private int percent; // 0 to 99
+    private volatile boolean moving = true;
     
     ColorAnimator(Pane pane) {
         this.pane = pane;
@@ -54,17 +55,27 @@ class ColorAnimator implements Runnable {
     public void run() {
         while (true) {
             try {
-                Platform.runLater(() -> {
-                    Color nextColor = next();
-                    pane.setStyle(CSS_BG + nextColor.getColorCode());     
-                    label.setText(String.format("%3d ", percent) + nextColor);
-                });
+                if (moving) {
+                    Platform.runLater(() -> {
+                        Color nextColor = next();
+                        pane.setStyle(CSS_BG + nextColor.getColorCode());     
+                        label.setText(String.format("%3d ", percent) + nextColor);
+                    });                    
+                }
                 Thread.sleep(REFRESH_INTERVAL);
             } catch (InterruptedException ex) {
                 LOG.warning("Updater interrupted!");
                 break;
             }
         }
+    }
+    
+    public boolean isMoving() {
+        return moving;
+    }
+    
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
     
     private Color next() {
