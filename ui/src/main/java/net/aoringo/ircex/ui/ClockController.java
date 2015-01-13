@@ -21,8 +21,9 @@ import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
 import net.aoringo.ircex.ui.plugin.Plugin;
 import net.aoringo.ircex.ui.plugin.PluginManager;
+import net.aoringo.ircex.ui.plugin.todowatch.TodoWatchPlugin;
 import net.aoringo.ircex.ui.plugin.traffic.TokyuPlugin;
-import net.aoringo.ircex.ui.plugin.weather.City;
+import net.aoringo.ircex.ui.plugin.weather.entity.City;
 import net.aoringo.ircex.ui.plugin.weather.WeatherPlugin;
 
 /**
@@ -97,6 +98,7 @@ public class ClockController implements Initializable, CommandCallback {
         // Initialize misc plugins
         plugins = new PluginManager(labelPluginMessage, pluginIconBox);
         plugins.addPlugin(new TokyuPlugin());
+        plugins.addPlugin(new TodoWatchPlugin());
 
         // Initialize additional plugins
         // Start update threads
@@ -178,6 +180,10 @@ public class ClockController implements Initializable, CommandCallback {
             labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
             labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
             labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);
+        } else if (command == Command.LEFT) {
+            plugins.selectPrevious();
+        } else if (command == Command.RIGHT) {
+            plugins.selectNext();
         } else if (command == Command.ENTER) {
             if (menu.isVisible()) {
                 switch (menuCursor) {

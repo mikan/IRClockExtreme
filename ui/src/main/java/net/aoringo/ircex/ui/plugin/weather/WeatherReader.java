@@ -3,6 +3,8 @@
  */
 package net.aoringo.ircex.ui.plugin.weather;
 
+import net.aoringo.ircex.ui.plugin.weather.entity.City;
+import net.aoringo.ircex.ui.plugin.weather.entity.WeatherForecast;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import net.aoringo.ircex.net.HttpClient;

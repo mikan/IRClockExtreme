@@ -3,6 +3,8 @@
  */
 package net.aoringo.ircex.ui.plugin.weather;
 
+import net.aoringo.ircex.ui.plugin.weather.entity.City;
+import net.aoringo.ircex.ui.plugin.weather.entity.WeatherForecast;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -20,7 +22,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import net.aoringo.ircex.ui.plugin.Plugin;
 import net.aoringo.ircex.ui.plugin.PluginCallback;
-import net.aoringo.ircex.ui.plugin.weather.WeatherForecast.Forecast;
+import net.aoringo.ircex.ui.plugin.weather.entity.WeatherForecast.Forecast;
 
 /**
  *

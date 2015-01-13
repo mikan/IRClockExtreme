@@ -1,7 +1,7 @@
 /*
  * Copyright(C) 2014-2015 mikan All rights reserved.
  */
-package net.aoringo.ircex.ui.plugin.weather;
+package net.aoringo.ircex.ui.plugin.weather.entity;
 
 /**
  * City definition.
