@@ -36,9 +36,9 @@ public class HttpClient {
      * @throws IOException if I/O error occurred
      */
     public String requestGet(String url) throws IOException {
-        return requestGet(url, StandardCharsets.UTF_8);
+        return requestGet(url, StandardCharsets.UTF_8, null);
     }
-
+    
     /**
      * Send request and receive text response with specified charset.
      *
@@ -48,8 +48,25 @@ public class HttpClient {
      * @throws IOException if I/O error occurred
      */
     public String requestGet(String url, Charset charset) throws IOException {
+        return requestGet(url, charset, null);
+    }
+
+    /**
+     * Send request and receive text response with specified charset.
+     * 
+     * <p>
+     * Authorization version.
+     * </p>
+     *
+     * @param url URL
+     * @param charset charset
+     * @param auth Authorization parameter
+     * @return response
+     * @throws IOException if I/O error occurred
+     */
+    public String requestGet(String url, Charset charset, String auth) throws IOException {
         Objects.requireNonNull(url);
-        HttpURLConnection connection = createGetConnection(new URL(url));
+        HttpURLConnection connection = createGetConnection(new URL(url), auth);
         int rcode = connection.getResponseCode();
         if (rcode == HttpURLConnection.HTTP_OK) {
             StringBuilder builder = new StringBuilder();
@@ -77,7 +94,7 @@ public class HttpClient {
      */
     public byte[] requestGetAsByteArray(String url) throws IOException {
         Objects.requireNonNull(url);
-        HttpURLConnection connection = createGetConnection(new URL(url));
+        HttpURLConnection connection = createGetConnection(new URL(url), null);
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         int rcode = connection.getResponseCode();
         if (rcode == HttpURLConnection.HTTP_OK) {
@@ -137,11 +154,14 @@ public class HttpClient {
         }
     }
 
-    private HttpURLConnection createGetConnection(URL url) throws IOException {
+    private HttpURLConnection createGetConnection(URL url, String auth) throws IOException {
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         connection.setInstanceFollowRedirects(false);
         connection.setUseCaches(false);
+        if (auth != null) {
+            connection.setRequestProperty("Authorization", auth);
+        }
         connection.connect();
         return connection;
     }

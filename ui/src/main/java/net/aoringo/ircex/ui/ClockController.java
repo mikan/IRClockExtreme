@@ -172,22 +172,26 @@ public class ClockController implements Initializable, CommandCallback {
     private void doCommand(Command command) {
         if (command == Command.MENU) {
             menu.setVisible(!menu.isVisible());
-        } else if (command == Command.UP) {
-            menuCursor = menuCursor.up();
-            labelCursorAdd.setVisible(menuCursor == MenuCursor.ADD);
-            labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
-            labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
-            labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);
-        } else if (command == Command.DOWN) {
-            menuCursor = menuCursor.down();
-            labelCursorAdd.setVisible(menuCursor == MenuCursor.ADD);
-            labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
-            labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
-            labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);
-        } else if (command == Command.LEFT) {
-            plugins.selectPrevious();
-        } else if (command == Command.RIGHT) {
-            plugins.selectNext();
+        } else if (command == Command.UP || command == Command.LEFT) {
+            if (menu.isVisible()) {
+                menuCursor = menuCursor.up();
+                labelCursorAdd.setVisible(menuCursor == MenuCursor.ADD);
+                labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
+                labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
+                labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);                
+            } else {
+                plugins.selectNext();
+            }
+        } else if (command == Command.DOWN || command == Command.RIGHT) {
+            if (menu.isVisible()) {
+                menuCursor = menuCursor.down();
+                labelCursorAdd.setVisible(menuCursor == MenuCursor.ADD);
+                labelCursorRemove.setVisible(menuCursor == MenuCursor.REMOVE);
+                labelCursorOption.setVisible(menuCursor == MenuCursor.OPTION);
+                labelCursorQuit.setVisible(menuCursor == MenuCursor.QUIT);
+            } else {
+                plugins.selectPrevious();
+            }
         } else if (command == Command.ENTER) {
             if (menu.isVisible()) {
                 switch (menuCursor) {
