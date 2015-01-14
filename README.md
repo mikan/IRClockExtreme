@@ -50,6 +50,9 @@ LIRCMD_CONF=""
 ### /etc/lirc/lircd.conf
 
 ```
+# Recorded by mikan@GitHub
+
+# Apple Remote 1
 begin remote
 
   name  Apple
@@ -81,31 +84,39 @@ begin remote
 
 end remote
 
+# Apple Remote 2
 begin remote
 
-  name  Toshiba
-  bits           16
+  name  Apple2
+  bits            8
   flags SPACE_ENC|CONST_LENGTH
   eps            30
   aeps          100
 
-  header      10243  5083
-  one           624  1947
-  zero          624   661
-  ptrail        626
+  header       9084  4605
+  one           538  1758
+  zero          538   632
+  ptrail        538
+  repeat       9088  2314
   pre_data_bits   16
-  pre_data       0xE730
-  gap          123013
-  toggle_bit_mask 0x3838
+  pre_data       0x77E1
+  post_data_bits  8
+  post_data      0xFE
+  gap          108744
+  toggle_bit_mask 0xF000
 
       begin codes
-          FULL                     0xE817
-          OFF                      0xD02F
-          SMALL                    0xF00F
+          MENU                     0xC0
+          CENTER                   0xA0
+          UP                       0x50
+          DOWN                     0x30
+          LEFT                     0x90
+          RIGHT                    0x60
       end codes
 
 end remote
 
+# IO-DATA HVT-BRC2
 begin remote
 
   name  IODATA
@@ -114,32 +125,27 @@ begin remote
   eps            30
   aeps          100
 
-  header       8936  4453
-  one           555  1674
-  zero          555   561
-  ptrail        554
+  header       8935  4451
+  one           550  1676
+  zero          550   567
+  ptrail        547
   pre_data_bits   24
   pre_data       0x11748
-  gap          107588
+  gap          107580
   min_repeat      1
 #  suppress_repeat 1
 #  uncomment to suppress unwanted repeats
-  toggle_bit_mask 0xC0C
+  toggle_bit_mask 0x84C
 
       begin codes
           POWER                    0x004C
-          CH1                      0x0800
-          CH2                      0x040C
-          CH3                      0x0C04
-          CH4                      0x020A
-          CH5                      0x0A02
-          CH6                      0x060E
-          CH7                      0x0E06
-          CH8                      0x0109
-          CH9                      0x0901
-          CH10                     0x050D
-          CH11                     0x0D05
-          CH12                     0x030B
+          MENU                     0x0A46
+          CENTER                   0x064A
+          UP                       0x0549
+          DOWN                     0x0D41
+          LEFT                     0x0B47
+          RIGHT                    0x034F
+          BACK                     0x014D
       end codes
 
 end remote
@@ -185,6 +191,48 @@ end
 
 begin
 	remote = Apple
+	prog = irexec
+	button = RIGHT
+	config = /opt/ircex/cmd.sh RIGHT
+end
+
+begin
+	remote = IODATA
+	prog = irexec
+	button = MENU
+	config = /opt/ircex/cmd.sh MENU
+end
+
+begin
+	remote = IODATA
+	prog = irexec
+	button = CENTER
+	config = /opt/ircex/cmd.sh ENTER
+end
+
+begin
+	remote = IODATA
+	prog = irexec
+	button = UP
+	config = /opt/ircex/cmd.sh UP
+end
+
+begin
+	remote = IODATA
+	prog = irexec
+	button = DOWN
+	config = /opt/ircex/cmd.sh DOWN
+end
+
+begin
+	remote = IODATA
+	prog = irexec
+	button = LEFT
+	config = /opt/ircex/cmd.sh LEFT
+end
+
+begin
+	remote = IODATA
 	prog = irexec
 	button = RIGHT
 	config = /opt/ircex/cmd.sh RIGHT
