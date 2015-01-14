@@ -65,9 +65,9 @@ public class TokyuPlugin implements Plugin {
                         URL, Charset.forName("Shift_JIS"));
                 int cp1 = html.indexOf("\">20");
                 int cp2 = html.indexOf("　現在");
-                String time = html.substring(cp1 + 2, cp2) + " 現在";
-                int infoPos = html.indexOf("</div>", cp2);
-                String info = html.substring(cp2 + 7, infoPos);
+                String time = html.substring(cp1 + 2, cp2) + "現在";
+                int cp3 = html.indexOf("</div>", cp2);
+                String info = html.substring(cp2 + 7, cp3);
                 setStatus(Status.NORMAL);
                 setMessage(info + " (" + time + ")");
             } catch (IOException ex) {
@@ -93,6 +93,7 @@ public class TokyuPlugin implements Plugin {
     }
 
     private void setMessage(String message) {
+        LOG.info(message);
         this.message = message;
         if (callback != null) {
             Platform.runLater(() -> {

@@ -48,6 +48,27 @@ public class PluginManager {
         selected = plugins.size() - 1;
         updateSelect();
     }
+    
+    public void removePlugin(Plugin plugin) {
+        int index = plugins.indexOf(plugin);
+        if (index < 0) {
+            throw new IllegalArgumentException("Missing plugin.");
+        }
+        iconPane.getChildren().remove(index);
+        plugins.remove(index);
+        selected--;
+        if (selected < 0) {
+            selected = 0;
+        }
+        updateSelect();
+    }
+
+    public List<Plugin> getRemovablePlugins() {
+        List<Plugin> list = new ArrayList<>();
+        plugins.stream().filter(p -> !p.getName().equals("Weather"))
+                .forEach(p -> list.add(p));
+        return list;
+    }
 
     public void refreshSelected() {
         plugins.get(selected).refresh();
@@ -56,7 +77,7 @@ public class PluginManager {
     public void refreshAll() {
         plugins.forEach(p -> p.refresh());
     }
-    
+
     public void select(int index) {
         if (index < 0 || index >= plugins.size()) {
             throw new IllegalArgumentException("index is out of range: " + index);

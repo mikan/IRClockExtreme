@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
@@ -58,5 +60,36 @@
             </children>
         </VBox>
         <Label id="labelDebug" fx:id="labelDebug" alignment="CENTER_RIGHT" layoutY="754.0" prefHeight="16.0" prefWidth="1366.0" />
+      <VBox id="manage" fx:id="manage" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="1366.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+         <children>
+            <Label id="labelManagePluginTitle" fx:id="labelManagePluginTitle" text="ADD PLUGIN" textFill="WHITE" />
+            <Polygon id="polygonUp" fx:id="polygonUp" fill="WHITE" stroke="BLACK" strokeType="INSIDE">
+              <points>
+                <Double fx:value="-50.0" />
+                <Double fx:value="40.0" />
+                <Double fx:value="50.0" />
+                <Double fx:value="40.0" />
+                <Double fx:value="0.0" />
+                <Double fx:value="-60.0" />
+              </points>
+            </Polygon>
+            <Label id="labelPluginName" fx:id="labelPluginName" text="PLUGIN" textFill="WHITE" />
+            <Polygon id="polygonDown" fx:id="polygonDown" fill="WHITE" rotate="180.0" stroke="BLACK" strokeType="INSIDE">
+              <points>
+                <Double fx:value="-50.0" />
+                <Double fx:value="40.0" />
+                <Double fx:value="50.0" />
+                <Double fx:value="40.0" />
+                <Double fx:value="0.0" />
+                <Double fx:value="-60.0" />
+              </points>
+            </Polygon>
+            <Label id="labelPluginHint" fx:id="labelPluginHint" text="Press CENTER BUTTON to add." textFill="WHITE">
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
     </children>
 </AnchorPane>

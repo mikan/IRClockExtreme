@@ -5,6 +5,7 @@ package net.aoringo.ircex.ui.plugin.weather;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Platform;
@@ -36,7 +37,7 @@ public class WeatherPlugin implements Plugin {
     private static final int FORECASTS = 5;
     private static final int ICON_SIZE = 75; // Actual size: 50
     private final ObservableList<Node> children;
-    private final City city;
+    private City city;
     private final byte[] icon;
     private String message = "Loading...";
     private PluginCallback callback;
@@ -96,6 +97,10 @@ public class WeatherPlugin implements Plugin {
     public void setCallback(PluginCallback callback) {
         this.callback = callback;
     }
+    
+    public void setCity(City city) {
+        this.city = city;
+    }
 
     private ProgressIndicator createProgress() {
         ProgressIndicator progress = new ProgressIndicator();
@@ -112,8 +117,12 @@ public class WeatherPlugin implements Plugin {
             children.add(labelCity);
             // Weather icons
             WeatherReader reader = new WeatherReader();
+            List<Forecast> weatherForecasts = weatherForecast.getForecasts();
+            if (!weatherForecasts.isEmpty()) {
+                weatherForecasts.remove(0); // Remove head data (past).
+            }
             int count = 0;
-            for (Forecast forecast : weatherForecast.getForecasts()) {
+            for (Forecast forecast : weatherForecasts) {
                 Image image;
                 try {
                     image = new Image(new ByteArrayInputStream(

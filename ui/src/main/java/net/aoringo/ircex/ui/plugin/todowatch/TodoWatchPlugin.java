@@ -71,6 +71,9 @@ public class TodoWatchPlugin implements Plugin {
                 return;
             }
             StringBuilder builder = new StringBuilder();
+            if (todos.size() > 0) {
+                builder.append("You have ").append(todos.size()).append(" ToDos. ");
+            }
             for (int i = 0; i < todos.size(); i++) {
                 builder.append("[").append(i + 1).append("] ");
                 builder.append(todos.get(i)).append(" ");

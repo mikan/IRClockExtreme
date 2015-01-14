@@ -41,3 +41,20 @@
 .labelDebug {
     -fx-font: 14px "Monospaced Regular";
 }
+
+#manage {
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(0,0,0,0.7);
+}
+
+#labelManagePluginTitle {
+    -fx-font-size: 96px;
+}
+
+#labelPluginName {
+    -fx-font-size: 96px;
+}
+
+#labelPluginHint {
+    -fx-font-size: 40px;
+}
