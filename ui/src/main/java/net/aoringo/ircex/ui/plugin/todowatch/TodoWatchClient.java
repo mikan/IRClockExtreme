@@ -38,7 +38,6 @@ public class TodoWatchClient {
         String res = client.requestPost(ENDPOINT + API_LOGIN, CONTENT_TYPE, params);
         LOG.log(Level.INFO, "TodoWatch login response: {0}", res);
         String json = client.requestGet(ENDPOINT + API_LIST);
-        LOG.log(Level.INFO, "TodoWatch list response: {0}", json);
         ObjectMapper mapper = new ObjectMapper();
         List<Todo> todos = mapper.readValue(json, new TypeReference<List<Todo>>() {});
         List<Todo> filtered = new ArrayList<>();

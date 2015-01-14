@@ -91,7 +91,6 @@ public class SotetsuPlugin implements Plugin {
     }
 
     private void setMessage(String message) {
-        LOG.info(message);
         this.message = message;
         if (callback != null) {
             Platform.runLater(() -> {

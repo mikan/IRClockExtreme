@@ -10,7 +10,7 @@ package net.aoringo.ircex.ui.plugin.weather.entity;
  */
 public enum City {
 
-    TOKYO("1850147"), YOKOHAMA("1848354");
+    TOKYO("1850147"), YOKOHAMA("1848354"), TOTTORI("1849892"), NEWYORK("5128638"), LUXEMBOURG("2960316"), JOHANNESBURG("993800");
 
     private final String code;
 
