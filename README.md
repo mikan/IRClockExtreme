@@ -3,7 +3,7 @@ IRClockExtreme
 
 IR Controllable Clock Application for Raspberry Pi.
 
-## Feautures
+## Overview
 
 ### Key Feautures
 
@@ -355,4 +355,4 @@ X-GNOME-UsesNotifications=true
 Path=/home/pi
 ```
 
-4. Have fun!
+Have fun!
