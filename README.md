@@ -3,9 +3,57 @@ IRClockExtreme
 
 IR Controllable Clock Application for Raspberry Pi.
 
-## LIRC configuration
+## Feautures
 
-### /etc/modules
+### Key Feautures
+
+* Display date and time
+* Background color animation
+* Display weather forecast
+* Extendable & customizable by plugins
+
+### Available plugins
+
+* Camera Plugin: Taking a picture and display to background
+* TodoWatch Plugin: Fetch ToDos from [TodoWatch](https://github.com/akeboshi/TodoWatch) server
+* Tokyu Plugin: Provides Tokyu traffic information
+* Sotetsu Plugin: Provides Sotetsu traffic information
+
+## Menu options
+
+* Add plugin
+* Remove plugin
+* City select of the weather forecast
+
+## System requirements
+
+| Item            | Tested with                   |
+|:----------------|:------------------------------|
+| Raspberry Pi    | Raspberry Pi Type B           |
+| Camera Module   | Raspberry Pi Camera Module    |
+| HDMI Display    | GECHIC ON-LAP 1302/J          |
+| Infrared Sensor | PARA Light PL-IRM2121-A538    |
+| GPIO Connection | Bread board + Jumper cables   |
+| IR Controller   | Apple Remote, IODATA HVT-BRC2 |
+
+...and Internet connection (proxy supported).
+
+You can execute on your PC, but camera featuture and IR controller feature are disabled. IR buttons are replaced with the following keys by keyboard:
+
+| IR Button | Keyboard |
+|:----------|:---------|
+| MENU      | SPACE    |
+| CENTER    | ENTER    |
+| TOP       | ↑        |
+| BOTTOM    | ↓        |
+| LEFT      | ←        |
+| RIGHT     | →        |
+
+## Configurations
+
+### LIRC configuration
+
+#### /etc/modules
 
 ```
 # /etc/modules: kernel modules to load at boot time.
@@ -19,7 +67,7 @@ lirc_dev
 lirc_rpi gpio_in_pin=17 gpio_out_pin=18
 ```
 
-### /etc/lirc/hardware.conf
+#### /etc/lirc/hardware.conf
 
 ```
 # /etc/lirc/hardware.conf
@@ -47,7 +95,7 @@ LIRCD_CONF=""
 LIRCMD_CONF=""
 ```
 
-### /etc/lirc/lircd.conf
+#### /etc/lirc/lircd.conf
 
 ```
 # Recorded by mikan@GitHub
@@ -151,7 +199,7 @@ begin remote
 end remote
 ```
 
-### /etc/lirc/lircrc
+#### /etc/lirc/lircrc
 
 ```
 begin
@@ -239,11 +287,11 @@ begin
 end
 ```
 
-## IRClockExtreme configuration
+### IRClockExtreme configuration
 
-### /opt/ircex/cmd.sh
+#### /opt/ircex/cmd.sh
 
-```
+```sh
 #!/bin/sh
 
 if [ $# -ne 1 ]; then
@@ -264,11 +312,22 @@ date >> $LOG
 $EXE $1 $HOST >> $LOG
 ```
 
-### /opt/ircex/cmd.{jar, py}
+#### /opt/ircex/cmd.{jar, py}
 
 Choise commander implementation and modify cmd.sh.
 
 cmd.py is located here:
 https://github.com/mikan/IRClockExtreme/blob/master/cmd/src/main/python/cmd.py
+
+#### {"user.home"}/proxy.properties
+
+If you run on your company's network, place configuration file to you home directory. The name is "proxy.properties".
+
+```ini
+net.proxy.host=<HOST>
+net.proxy.port=<PORT>
+net.proxy.userid=<USER>
+net.proxy.userpassword=<PASSWORD>
+```
 
 Have fun!
