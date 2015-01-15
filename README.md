@@ -95,7 +95,7 @@ LIRCD_CONF=""
 LIRCMD_CONF=""
 ```
 
-#### /etc/lirc/lircd.conf
+#### /etc/lirc/lircd.conf (Sample)
 
 ```
 # Recorded by mikan@GitHub
@@ -199,7 +199,7 @@ begin remote
 end remote
 ```
 
-#### /etc/lirc/lircrc
+#### /etc/lirc/lircrc (Sample)
 
 ```
 begin
