@@ -330,4 +330,29 @@ net.proxy.userid=<USER>
 net.proxy.userpassword=<PASSWORD>
 ```
 
-Have fun!
+#### Launch files
+
+1. Get newest version of `IRClockExtremeUI-1.0.jar` from [Releases page](https://github.com/mikan/IRClockExtreme/releases).
+
+2. Get icon file from [here](https://github.com/mikan/IRClockExtreme/blob/master/ui/src/main/resources/img/icon.png) and place to `/home/pi/icon.png`.
+
+3. Create `IRClockEx.desktop` file to `/home/pi/Desktop/`.
+
+```
+[Desktop Entry]
+Name=IRClockEx
+Name[en_GB]=IRClockEx
+GenericName=IRClockExtreme
+GenericName[en_GB]=IRClockExtreme
+X-GNOME-FullName=IRClockExtreme
+X-GNOME-FullName[en_GB]=IRClockExtreme
+Exec=java -jar /home/pi/IRClockExtremeUI-1.0.jar
+StartupNotify=true
+Terminal=false
+Type=Application
+Icon=/home/pi/icon.png
+X-GNOME-UsesNotifications=true
+Path=/home/pi
+```
+
+4. Have fun!
