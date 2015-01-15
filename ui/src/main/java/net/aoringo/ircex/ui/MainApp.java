@@ -3,20 +3,35 @@
  */
 package net.aoringo.ircex.ui;
 
+import java.net.Authenticator;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import net.aoringo.ircex.net.ProxyConfiguration;
 
 /**
- * 
+ *
  * @author mikan
  */
 public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
+        // Check proxy configuration
+        ProxyConfiguration proxy = new ProxyConfiguration();
+        if (proxy.isProxyEnabled()) {
+            System.setProperty("http.proxyHost", proxy.getHost());
+            System.setProperty("http.proxyPort", proxy.getPort());
+            System.setProperty("https.proxyHost", proxy.getHost());
+            System.setProperty("https.proxyPort", proxy.getPort());
+        }
+        if (proxy.isAuthenticationEnabled()) {
+            Authenticator.setDefault(proxy);
+        }
+
+        // Start JavaFX platform
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
@@ -25,7 +40,7 @@ public class MainApp extends Application {
         stage.setFullScreen(true);
         stage.show();
     }
-    
+
     @Override
     public void stop() throws Exception {
     }
