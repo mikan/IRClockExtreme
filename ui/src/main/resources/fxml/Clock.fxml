@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="wrapper" fx:id="wrapper" onKeyPressed="#handleKeyAction" onMouseClicked="#handleMouseAction" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.aoringo.ircex.ui.ClockController">
+<AnchorPane id="wrapper" fx:id="wrapper" onMouseClicked="#handleMouseAction" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/Styles.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.aoringo.ircex.ui.ClockController">
     <children>
         <VBox id="clock" alignment="CENTER" prefHeight="768.0" prefWidth="1366.0">
             <children>
@@ -91,5 +91,6 @@
             </Label>
          </children>
       </VBox>
+      <TextField fx:id="textFieldKey" id="textFieldKey" layoutY="751.0" prefHeight="23.0" prefWidth="0.0" onKeyPressed="#handleKeyAction" />
     </children>
 </AnchorPane>

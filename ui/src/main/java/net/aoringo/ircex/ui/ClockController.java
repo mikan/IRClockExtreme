@@ -14,11 +14,12 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Polygon;
 import net.aoringo.ircex.receiver.Command;
 import net.aoringo.ircex.receiver.CommandCallback;
 import net.aoringo.ircex.receiver.CommandReceiver;
@@ -72,6 +73,9 @@ public class ClockController implements Initializable, CommandCallback {
 
     @FXML
     private HBox pluginIconBox;
+    
+    @FXML
+    private TextField textFieldKey;
 
     // #################### MENU SCREEN ITEMS ####################
     @FXML
@@ -102,12 +106,6 @@ public class ClockController implements Initializable, CommandCallback {
     private Label labelPluginName;
 
     @FXML
-    private Polygon polygonUp;
-
-    @FXML
-    private Polygon polygonDown;
-
-    @FXML
     private Label labelPluginHint;
 
     private int select = 0;
@@ -116,7 +114,8 @@ public class ClockController implements Initializable, CommandCallback {
     public void initialize(URL url, ResourceBundle rb) {
 
         // Initialize UI components
-        wrapper.requestFocus();
+        textFieldKey.requestFocus();
+        textFieldKey.setBackground(Background.EMPTY);
         menu.setVisible(false);
         manage.setVisible(false);
         menuCursor = MenuCursor.ADD;
