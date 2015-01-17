@@ -3,6 +3,8 @@ IRClockExtreme
 
 IR Controllable Clock Application for Raspberry Pi.
 
+[![Watch Video on YouTube](http://img.youtube.com/vi/WCPHfbfwH5c/0.jpg)](http://www.youtube.com/watch?v=WCPHfbfwH5c)
+
 ## Overview
 
 ### Key Feautures
