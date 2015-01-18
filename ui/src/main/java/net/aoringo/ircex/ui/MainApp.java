@@ -32,7 +32,7 @@ public class MainApp extends Application {
         }
 
         // Start JavaFX platform
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock_FWXGA.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         stage.setTitle("IR Clock Extreme");
