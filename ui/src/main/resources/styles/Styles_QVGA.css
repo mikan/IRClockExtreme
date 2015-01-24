@@ -1,0 +1,60 @@
+.button {
+    -fx-font-weight: bold;
+}
+
+#wrapper {
+    -fx-background-color: #e74c3c;
+}
+
+#labelClockDate {
+    -fx-font-size: 10px;
+}
+
+.labelClockTime {
+    -fx-font-size: 10px;
+}
+
+#labelPluginMessage {
+    -fx-padding: 10px;
+    -fx-background-radius: 10;
+    -fx-background-color: rgba(255,255,255,0.5);
+    -fx-font-size: 10px;
+}
+
+#menu {
+    -fx-background-radius: 50;
+    -fx-background-color: rgba(0,0,0,0.7);
+}
+
+#labelMenuTitle {
+    -fx-font-size: 10px;
+}
+
+.labelMenuCursor {
+    -fx-font-size: 10px;
+}
+
+.labelMenuItem {
+    -fx-font-size: 10px;
+}
+
+.labelDebug {
+    -fx-font: 8px "Monospaced Regular";
+}
+
+#manage {
+    -fx-background-radius: 5;
+    -fx-background-color: rgba(0,0,0,0.7);
+}
+
+#labelManagePluginTitle {
+    -fx-font-size: 10px;
+}
+
+#labelPluginName {
+    -fx-font-size: 10px;
+}
+
+#labelPluginHint {
+    -fx-font-size: 10px;
+}

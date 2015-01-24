@@ -32,12 +32,13 @@ public class MainApp extends Application {
         }
 
         // Start JavaFX platform
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock_FWXGA.fxml"));
+//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock_FWXGA.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/fxml/Clock_QVGA.fxml"));
         Scene scene = new Scene(root);
         scene.getStylesheets().add("/styles/Styles.css");
         stage.setTitle("IR Clock Extreme");
         stage.setScene(scene);
-        stage.setFullScreen(true);
+//        stage.setFullScreen(true);
         stage.show();
     }
 
@@ -46,10 +47,9 @@ public class MainApp extends Application {
     }
 
     /**
-     * The main() method is ignored in correctly deployed JavaFX application.
-     * main() serves only as fallback in case the application can not be
-     * launched through deployment artifacts, e.g., in IDEs with limited FX
-     * support. NetBeans ignores main().
+     * The main() method is ignored in correctly deployed JavaFX application. main() serves only as
+     * fallback in case the application can not be launched through deployment artifacts, e.g., in
+     * IDEs with limited FX support. NetBeans ignores main().
      *
      * @param args the command line arguments
      */

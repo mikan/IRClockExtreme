@@ -11,9 +11,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="wrapper" fx:id="wrapper" onMouseClicked="#handleMouseAction" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../styles/Styles_FWXGA.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.aoringo.ircex.ui.ClockController">
+<AnchorPane id="wrapper" fx:id="wrapper" onMouseClicked="#handleMouseAction" prefHeight="240.0" prefWidth="320.0" stylesheets="@../styles/Styles_QVGA.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="net.aoringo.ircex.ui.ClockController">
     <children>
-        <VBox id="clock" alignment="CENTER" prefHeight="768.0" prefWidth="1366.0">
+        <VBox id="clock" alignment="CENTER" prefHeight="240.0" prefWidth="320.0">
             <children>
                 <Label id="labelClockDate" fx:id="labelClockDate" />
                 <HBox fx:id="clockBox" alignment="CENTER">
@@ -25,17 +25,17 @@
                 </HBox>
                 <HBox fx:id="weatherBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" />
                 <Pane prefHeight="50.0" prefWidth="0.0" />
-                <Label id="labelPluginMessage" fx:id="labelPluginMessage" prefHeight="80.0" prefWidth="1320.0" />
-                <HBox fx:id="pluginIconBox" prefHeight="100.0" prefWidth="1320.0" />
+                <Label id="labelPluginMessage" fx:id="labelPluginMessage" prefHeight="10.0" prefWidth="320.0" />
+                <HBox fx:id="pluginIconBox" prefHeight="30.0" prefWidth="320.0" />
             </children>
         </VBox>
-        <VBox id="menu" fx:id="menu" alignment="CENTER" prefHeight="768.0" prefWidth="1366.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+        <VBox id="menu" fx:id="menu" alignment="CENTER" prefHeight="240.0" prefWidth="320.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
             <children>
                 <Label id="labelMenuTitle" text="M E N U" textFill="WHITE" />
-                <GridPane hgap="10.0" vgap="80.0">
+                <GridPane hgap="5.0" vgap="8.0">
                     <columnConstraints>
-                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="624.0" minWidth="10.0" prefWidth="157.0" />
-                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1134.0" minWidth="10.0" prefWidth="1109.0" />
+                        <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="320.0" minWidth="10.0" prefWidth="320.0" />
                     </columnConstraints>
                     <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -54,43 +54,43 @@
                         <Label fx:id="labelQuit" styleClass="labelMenuItem" text="Quit" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                     </children>
                     <VBox.margin>
-                        <Insets top="50.0" />
+                        <Insets top="5.0" />
                     </VBox.margin>
                 </GridPane>
             </children>
         </VBox>
-        <Label id="labelDebug" fx:id="labelDebug" alignment="CENTER_RIGHT" layoutY="754.0" prefHeight="16.0" prefWidth="1366.0" />
-        <VBox id="manage" fx:id="manage" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="768.0" prefWidth="1366.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
+        <Label id="labelDebug" fx:id="labelDebug" alignment="CENTER_RIGHT" layoutY="200.0" prefHeight="16.0" prefWidth="320.0" />
+        <VBox id="manage" fx:id="manage" alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="240.0" prefWidth="320.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
             <children>
                 <Label id="labelManagePluginTitle" fx:id="labelManagePluginTitle" text="ADD PLUGIN" textFill="WHITE" />
                 <Polygon id="polygonUp" fx:id="polygonUp" fill="WHITE" stroke="BLACK" strokeType="INSIDE">
                     <points>
-                        <Double fx:value="-50.0" />
-                        <Double fx:value="40.0" />
-                        <Double fx:value="50.0" />
-                        <Double fx:value="40.0" />
+                        <Double fx:value="-5.0" />
+                        <Double fx:value="4.0" />
+                        <Double fx:value="5.0" />
+                        <Double fx:value="4.0" />
                         <Double fx:value="0.0" />
-                        <Double fx:value="-60.0" />
+                        <Double fx:value="-6.0" />
                     </points>
                 </Polygon>
                 <Label id="labelPluginName" fx:id="labelPluginName" text="PLUGIN" textFill="WHITE" />
                 <Polygon id="polygonDown" fx:id="polygonDown" fill="WHITE" rotate="180.0" stroke="BLACK" strokeType="INSIDE">
                     <points>
-                        <Double fx:value="-50.0" />
-                        <Double fx:value="40.0" />
-                        <Double fx:value="50.0" />
-                        <Double fx:value="40.0" />
+                        <Double fx:value="-5.0" />
+                        <Double fx:value="4.0" />
+                        <Double fx:value="5.0" />
+                        <Double fx:value="4.0" />
                         <Double fx:value="0.0" />
-                        <Double fx:value="-60.0" />
+                        <Double fx:value="-6.0" />
                     </points>
                 </Polygon>
                 <Label id="labelPluginHint" fx:id="labelPluginHint" text="Press CENTER BUTTON to add." textFill="WHITE">
                     <VBox.margin>
-                        <Insets top="40.0" />
+                        <Insets top="4.0" />
                     </VBox.margin>
                 </Label>
             </children>
         </VBox>
-        <TextField fx:id="textFieldKey" id="textFieldKey" layoutY="751.0" prefHeight="23.0" prefWidth="0.0" onKeyPressed="#handleKeyAction" />
+        <TextField id="textFieldKey" fx:id="textFieldKey" layoutY="230.0" onKeyPressed="#handleKeyAction" prefHeight="0.0" prefWidth="0.0" />
     </children>
 </AnchorPane>
