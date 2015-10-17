@@ -1,5 +1,5 @@
-IRClockExtreme
-==============
+ir-clock
+========
 
 IR Controllable Clock Application for Raspberry Pi.
 
@@ -289,7 +289,7 @@ begin
 end
 ```
 
-### IRClockExtreme configuration
+### ir-clock configuration
 
 #### /opt/ircex/cmd.sh
 
@@ -319,7 +319,7 @@ $EXE $1 $HOST >> $LOG
 Choise commander implementation and modify cmd.sh.
 
 cmd.py is located here:
-https://github.com/mikan/IRClockExtreme/blob/master/cmd/src/main/python/cmd.py
+https://github.com/mikan/ir-clock/blob/master/cmd/src/main/python/cmd.py
 
 #### {"user.home"}/proxy.properties
 
@@ -334,9 +334,9 @@ net.proxy.userpassword=<PASSWORD>
 
 #### Launch files
 
-1. Get newest version of `IRClockExtremeUI-1.0.jar` from [Releases page](https://github.com/mikan/IRClockExtreme/releases).
+1. Get newest version of `IRClockExtremeUI-1.0.jar` from [Releases page](https://github.com/mikan/ir-clock/releases).
 
-2. Get icon file from [here](https://github.com/mikan/IRClockExtreme/blob/master/ui/src/main/resources/img/icon.png) and place to `/home/pi/icon.png`.
+2. Get icon file from [here](https://github.com/mikan/ir-clock/blob/master/ui/src/main/resources/img/icon.png) and place to `/home/pi/icon.png`.
 
 3. Create `IRClockEx.desktop` file to `/home/pi/Desktop/`.
 
